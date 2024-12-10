@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-cadastrar-produtos',
@@ -8,6 +9,8 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./cadastrar-produtos.component.css']
 })
 export class CadastrarProdutosComponent implements OnInit {
+
+  mensagem_cadastro: string = '';
 
   // injeção de dependência
   constructor(private httpClient : HttpClient) { }
@@ -29,7 +32,25 @@ export class CadastrarProdutosComponent implements OnInit {
 
   // função executada no submit do formulário
   onSubmit(): void {
-    alert('Teste!');
+
+    this.mensagem_cadastro = "Processando, por favor aguarde...";
+
+    // requisição http post para o serviço de cadastro de produto da API
+    this.httpClient.post(environment.baseUrl + "api/produtos", this.formCadastro.value)
+        .subscribe(
+          response => {
+            //armazenar a mensagem obtida da api
+            this.mensagem_cadastro = response["mensagem"];
+
+            // limpar campos do formulário
+            this.formCadastro.reset;
+
+            console.log(response["mensagem"]);
+          },
+          (error) => {
+            console.error('Erro ao buscar dados:', error);
+          }
+        );
   }
 
 }
