@@ -1,0 +1,38 @@
+
+<h5>Cadastro de Produtos</h5>
+<p>Preencha os campos para incluir um produto.</p>
+
+<form class="mt-3" [formGroup]="formCadastro" (ngSubmit)="onSubmit()">
+
+  <div class="row">
+    <div class="col-md-6">
+      <label>Nome do Produto:</label>
+      <input type="text" class="form-control" placeholder="Digite aqui" formControlName="nome"/>
+      <div class="text-danger" *ngIf="form.nome.touched && form.nome.invalid">
+        Informe o nome do produto.
+      </div>
+    </div>
+    <div class="col-md-3">
+      <label>Preço do Produto:</label>
+      <input type="text" class="form-control" placeholder="Digite aqui" formControlName="preco"/>
+      <div class="text-danger" *ngIf="form.preco.touched && form.preco.invalid">
+        Informe o preço do produto.
+      </div>
+    </div>
+    <div class="col-md-3">
+      <label>Quantidade:</label>
+      <input type="text" class="form-control" placeholder="Digite aqui" formControlName="quantidade"/>
+      <div class="text-danger" *ngIf="form.quantidade.touched && form.quantidade.invalid">
+        Informe a quantidade do produto.
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3 mt-3">
+    <div class="col-md-12">
+      <input type="submit" value="Realizar Cadastro" class="btn btn-success"
+        [disabled]="!formCadastro.valid"/>
+    </div>
+  </div>
+
+</form>

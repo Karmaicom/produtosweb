@@ -1,0 +1,42 @@
+
+<h5>Consulta de Produtos</h5>
+<p>Listagem de produtos cadastrados no sistema.</p>
+
+<table class="table table-sm">
+  <thead>
+    <th>Nome do produto</th>
+    <th>Preço</th>
+    <th>Quantidade</th>
+    <th>Total</th>
+    <th>Data da cadastro</th>
+    <th>Operações</th>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let item of produtos">
+      <td>{{item.nome | uppercase}}</td>
+      <td>{{item.preco | currency: 'R$'}}</td>
+      <td>{{item.quantidade}}</td>
+      <td>{{item.preco * item.quantidade | currency: 'R$'}}</td>
+      <td>{{item.dataCadastro | date: 'dd/MM/yyyy hh:mm'}}</td>
+      <td>
+        <button [routerLink]="['/editar-produtos', item.idProduto]" class="btn btn-primary btn-sm">
+          Editar
+        </button>
+        &nbsp;
+        <button class="btn btn-danger btn-sm">
+          Excluir
+        </button>
+      </td>
+    </tr>
+  </tbody>
+
+  <tfoot>
+    <tr>
+      <td colspan="6">
+        Quantidade de produtos: {{produtos.length}}
+      </td>
+    </tr>
+  </tfoot>
+
+</table>
