@@ -2,6 +2,15 @@
 <h5>Consulta de Produtos</h5>
 <p>Listagem de produtos cadastrados no sistema.</p>
 
+<div class="row mb-3 mt-3" *ngIf="mensagem_exclusao">
+  <div class="col-md-12">
+    <div class="alert alert-primary alert-dismissible fade show">
+      <strong>{{mensagem_exclusao}}</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+
 <table class="table table-sm">
   <thead>
     <th>Nome do produto</th>
@@ -24,7 +33,7 @@
           Editar
         </button>
         &nbsp;
-        <button class="btn btn-danger btn-sm">
+        <button (click)="excluirProduto(item.idProduto)" class="btn btn-danger btn-sm">
           Excluir
         </button>
       </td>
