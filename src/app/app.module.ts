@@ -13,8 +13,7 @@ import { EditarProdutosComponent } from './editar-produtos/editar-produtos.compo
 const routes: Routes = [
   { path : 'cadastrar-produtos', component : CadastrarProdutosComponent},
   { path : 'consultar-produtos', component : ConsultarProdutosComponent},
-  { path : 'editar-produtos/:id', component : EditarProdutosComponent},
-  { path: '**', redirectTo: '', pathMatch: 'full' }
+  { path : 'editar-produtos/:id', component : EditarProdutosComponent}
 ];
 
 @NgModule({

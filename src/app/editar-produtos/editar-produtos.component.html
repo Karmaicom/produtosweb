@@ -2,29 +2,47 @@
 <h5>Edição de Produto</h5>
 <p>Utilize os campos abaixo para editar um produto.</p>
 
-<form class="mt-3">
+<form class="mt-3" [formGroup]="formEdicao" (ngSubmit)="onSubmit()">
 
   <!-- campo oculto -->
-  <input type="hidden" class="form-control"/>
+  <input type="hidden" class="form-control" formControlName="idProduto"/>
 
   <div class="row">
     <div class="col-md-6">
       <label>Nome do Produto:</label>
-      <input type="text" class="form-control" placeholder="Digite aqui"/>
+      <input name="nome" type="text" class="form-control" placeholder="Digite aqui" formControlName="nome"/>
+      <div class="text-danger" *ngIf="form.nome.touched && form.nome.invalid">
+        Informe o nome do produto.
+      </div>
     </div>
     <div class="col-md-3">
       <label>Preço do Produto:</label>
-      <input type="text" class="form-control" placeholder="Digite aqui"/>
+      <input name="preco" type="text" class="form-control" placeholder="Digite aqui" formControlName="preco"/>
+      <div class="text-danger" *ngIf="form.preco.touched && form.nome.invalid">
+        Informe o preço do produto.
+      </div>
     </div>
     <div class="col-md-3">
       <label>Quantidade:</label>
-      <input type="text" class="form-control" placeholder="Digite aqui"/>
+      <input name="quantidade" type="text" class="form-control" placeholder="Digite aqui" formControlName="quantidade"/>
+      <div class="text-danger" *ngIf="form.quantidade.touched && form.nome.invalid">
+        Informe a quantidade do produto.
+      </div>
     </div>
   </div>
 
   <div class="row mb-3 mt-3">
     <div class="col-md-12">
       <input type="submit" value="Salvar Alterações" class="btn btn-primary"/>
+    </div>
+  </div>
+
+  <div class="row mb-3" *ngIf="mensagem_edicao">
+    <div class="col-md-12">
+      <div class="alert alert-primary alert-dismissible fade show">
+        <strong>{{mensagem_edicao}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
     </div>
   </div>
 

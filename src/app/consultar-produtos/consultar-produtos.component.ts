@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 export class ConsultarProdutosComponent implements OnInit {
 
   produtos: any[] = [];
+  mensagem_exclusao: string = '';
 
   constructor(private httpClient: HttpClient)
   {
@@ -26,6 +27,27 @@ export class ConsultarProdutosComponent implements OnInit {
         console.error('Erro ao buscar dados:', error);
       }
     )
+  }
+
+  // funça executada ao clicar no botão excluir
+  excluirProduto(idProduto: string): void {
+    // solciitar que o usuário confirme a exclusão
+    if (window.confirm('Deseja realmente excluir o produto?')) {
+      //executar o serviço de esclusão do produto
+      this.httpClient.delete(environment.baseUrl + "api/produtos/" + idProduto)
+        .subscribe(
+          (response:any) => {
+            // armazenar a mensagem obtida na api
+            this.mensagem_exclusao = response["mensagem"];
+
+            // recarregar a tela de consulta
+            this.ngOnInit();
+          }
+        ),
+        (error) => {
+          console.error('Erro ao buscar dados:', error);
+        }
+    }
   }
 
 }

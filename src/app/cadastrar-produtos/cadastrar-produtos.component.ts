@@ -48,6 +48,7 @@ export class CadastrarProdutosComponent implements OnInit {
             console.log(response["mensagem"]);
           },
           (error) => {
+            this.mensagem_cadastro = "Status: " + error["status"] + " | " + "Error: " + error["statusText"];
             console.error('Erro ao buscar dados:', error);
           }
         );
